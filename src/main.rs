@@ -13,7 +13,6 @@ fn main() {
      * Rust default type i32 i.e. signed 32 bit number*/
     let secret_number = rand::thread_rng().gen_range(1,101);
     
-    println!("The secret number in: {}", secret_number); 
     loop {
         println!("Please input you guess");
 
@@ -39,8 +38,15 @@ fn main() {
         * trim - method on the String guess that eliminate any whitespace at the beginning and end and
         * also \n (newline)
         * parse - parses a string into some kind of number type, in this cas u32*/
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+        /* Alternative error handling, instead of crashing the program on error, the program
+         * handles the error, using the match expression
+         * ok - returns the number if the string conversion was successful
+         * Err(_) - on all errors start from the next iteration of the loop*/
+        //    .expect("Please type a number!");
     
         /* {} - placeholder */
         println!("You guessed: {}", guess);
