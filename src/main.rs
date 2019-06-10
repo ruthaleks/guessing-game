@@ -1,7 +1,17 @@
 use std::io; // input/output library (from standard library)
+use rand::Rng; // defines methods that random number genarators implement 
 
 fn main() {
     println!("Guess the number!"); // the ! indicates that println! is a macro and not a function
+    
+    /* rand::thread_rng - function will give the particular random number generator: one that is
+     * local to the current thread of execution and seeded by the operatong system
+     * gen_range - method that takes two numbers as arguments and generates a random number between
+     * them, a number between 1 and 100*/
+    let secret_number = rand::thread_rng().gen_range(1,101);
+    
+    println!("The secret number in: {}", secret_number); 
+
     println!("Please input you guess");
 
     /* let - used to create a variable, in Rust variables are immutable (unchangeble) by default
